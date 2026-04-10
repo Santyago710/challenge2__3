@@ -156,14 +156,34 @@ python src/preprocessing.py
 
 ### 1. Load Training Data
 
-Load the datasets using Python:
+Load the dataset using Python and do some standardization for the columns we need:
 
 ```python
-import pickle
-
-with open("data/X_labeled.pkl", "rb") as f:
-    X_labeled = pickle.load(f)
-
-with open("data/y_labeled.pkl", "rb") as f:
-    y_labeled = pickle.load(f)
+df = pd.read_csv("../data/air_quality_processed.csv")
+df = df.drop(columns=["Name","Start_Date"])
+scaler=StandardScaler()
+columnas=["Geo Join ID","Data Value","year","month","day_of_week"]
+df[columnas] = scaler.fit_transform(df[columnas])
 ```
+### 2. Split the dataset and prepare it
+We split the dataset into labeled and unlabeled making sure that the labeled date is the 20% of all the dataset and the remaining is in the other set (unlabeled).
+Then we split our x data (the features we are going to use for the machine prediction) and y data (our goal), obviously for both types of data (unlabeled and labeled).
+And in case we need this date later we put it in a .pkl file with:
+```python
+with open("../data/X_labeled.pkl", "wb") as f:
+    pickle.dump(X_labeled, f)
+with open("../data/y_labeled.pkl", "wb") as f:
+    pickle.dump(y_labeled, f)
+with open("../data/X_unlabeled.pkl", "wb") as f:
+    pickle.dump(X_unlabeled, f)
+with open("../data/y_unlabeled.pkl", "wb") as f:
+    pickle.dump(y_unlabeled, f)
+```
+### 3. Training The Models
+We use the data we already prepared for the train and evaluation of the models but before that we put a different set of seeds that in the end will give us some metrics like:
+- The Accuracy
+- The Precision
+- The Recall
+- The F1-Score
+That to have a summarized information for later comparition.
+

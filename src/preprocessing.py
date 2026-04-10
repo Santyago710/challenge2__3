@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import LabelEncoder, StandardScaler
+from sklearn.preprocessing import LabelEncoder
 
 # =========================
 # LOAD DATA
@@ -12,7 +12,8 @@ df = pd.read_csv("data/Air_Quality.csv")
 # BASIC CLEANING
 # =========================
 
-df = df.drop(columns=["Unique ID", "Geo Join ID", "Message"])
+# Eliminamos columnas que no usaremos
+df = df.drop(columns=["Unique ID", "Message"], errors="ignore")
 
 # =========================
 # DATE ENGINEERING
@@ -53,21 +54,21 @@ le = LabelEncoder()
 df["target"] = le.fit_transform(df["Name"])
 
 # =========================
-# ONE HOT ENCODING
+# SELECT FINAL COLUMNS
 # =========================
 
-df = pd.get_dummies(
-    df,
-    columns=["Measure", "Geo Type Name", "Geo Place Name", "Time Period"],
-)
-
-# =========================
-# FEATURE SCALING
-# =========================
-
-scaler = StandardScaler()
-
-df["Data Value"] = scaler.fit_transform(df[["Data Value"]])
+df = df[
+    [
+        "Name",
+        "Geo Join ID",
+        "Start_Date",
+        "year",
+        "month",
+        "day_of_week",
+        "target",
+        "Data Value",
+    ]
+]
 
 # =========================
 # SAVE DATASET
@@ -77,3 +78,4 @@ df.to_csv("data/air_quality_processed.csv", index=False)
 
 print("Preprocessing completed")
 print("Final shape:", df.shape)
+print(df.head())

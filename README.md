@@ -123,10 +123,6 @@ This script performs the following transformations:
 
 - pollutant names are encoded using **LabelEncoder**
 
-**Feature Scaling**
-
-- pollutant measurement values normalized using **StandardScaler**
-
 ---
 
 ### 3. Processed Dataset
@@ -148,9 +144,8 @@ The following datasets are available:
 |------|------|
 | X_labeled.pkl | Features for labeled training data |
 | y_labeled.pkl | Labels for labeled data |
-| X_unlabeled.pkl | Unlabeled data for semi-supervised learning |
-| X_test.pkl | Test features |
-| y_test.pkl | Test labels |
+| X_unlabeled.pkl | Unlabeled features for semi-supervised learning and evaluation |
+| y_unlabeled.pkl | Unlabeled labels for semi-supervised learning and evaluation |
 
 ---
 ## Running the Pipeline
@@ -171,3 +166,4 @@ with open("data/X_labeled.pkl", "rb") as f:
 
 with open("data/y_labeled.pkl", "rb") as f:
     y_labeled = pickle.load(f)
+```

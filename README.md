@@ -98,8 +98,11 @@ This script performs the following transformations:
 
 - removal of irrelevant columns
   - `Unique ID`
-  - `Geo Join ID`
   - `Message`
+  - `Geo Type Name`
+  - `Time Period`
+  - `Indicator ID`
+  - `Measure`
 
 **Temporal Feature Engineering**
 
@@ -115,14 +118,6 @@ This script performs the following transformations:
 **Outlier Removal**
 
 - outliers are filtered using the **Interquartile Range (IQR) method**
-
-**Categorical Encoding**
-
-- One-Hot Encoding applied to:
-  - Measure
-  - Geo Type Name
-  - Geo Place Name
-  - Time Period
 
 **Target Encoding**
 

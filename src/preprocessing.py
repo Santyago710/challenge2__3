@@ -12,7 +12,7 @@ df = pd.read_csv("data/Air_Quality.csv")
 # BASIC CLEANING
 # =========================
 
-# Eliminamos columnas que no usaremos
+# We remove columns that we will not use
 df = df.drop(columns=["Unique ID", "Message"], errors="ignore")
 
 # =========================

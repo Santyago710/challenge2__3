@@ -1,15 +1,15 @@
 # Environment Setup
 
 ## Create a virtual environment and install dependencies.
-
+```bash
 python -m venv .venv
 
 source .venv/bin/activate
-
+```
 # Install required packages:
-
+```bash
 pip install -r requirements.txt
-
+```
 
 # Air Quality Machine Learning Challenge
 

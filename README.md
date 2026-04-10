@@ -185,5 +185,6 @@ We use the data we already prepared for the train and evaluation of the models b
 - The Precision
 - The Recall
 - The F1-Score
+
 That to have a summarized information for later comparition.
 

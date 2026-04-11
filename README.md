@@ -41,9 +41,14 @@ challenge2__3
 │
 ├── notebooks
 │ └── EDA.ipynb
+│ └── semi_supervised.ipynb
+│ └── baseline_models.ipynb
 │
 ├── src
 │ └── preprocessing.py
+│ └── ssl_methods.py
+│ └── evaluation.py
+│ └── models.py
 │
 └── README.md
 
@@ -188,3 +193,81 @@ We use the data we already prepared for the train and evaluation of the models b
 
 That to have a summarized information for later comparition. All this can be found in the notebooks/baseline_models.ipynb
 
+# Work Completed (Person 3) - Semi-Supervised Stage
+
+Implemented the full **modeling, semi-supervised learning, and evaluation** stage.
+
+### 1. Semi-Supervised Notebook
+
+File:
+notebooks/semi_supervised.ipynb
+
+Implemented workflow:
+
+- load processed data and required splits (`X_labeled`, `X_unlabeled`, `X_test`, `y_*`)
+- auto-generate split files if they are missing
+- train supervised baselines for comparison
+- train semi-supervised methods:
+  - Self-Training (pseudo-labeling)
+  - Label Spreading
+- evaluate using weighted metrics and save outputs
+- generate comparison plot (`data/ssl_comparison.png`)
+
+### 2. Evaluation Utilities
+
+File:
+src/evaluation.py
+
+Responsibilities:
+
+- compute standard classification metrics:
+  - accuracy
+  - weighted precision
+  - weighted recall
+  - weighted F1
+- convert result rows into a sorted DataFrame for reporting
+
+### 3. Model Builders
+
+File:
+src/models.py
+
+Implemented model factory functions:
+
+- supervised baseline: `RandomForestClassifier`
+- SSL self-training model: `SelfTrainingClassifier` with logistic regression base estimator
+- SSL graph model: `LabelSpreading`
+
+This keeps hyperparameters centralized and reusable across notebook and scripts.
+
+### 4. End-to-End SSL Script
+
+File:
+src/ssl_methods.py
+
+The script performs end-to-end execution:
+
+- load `data/air_quality_processed.csv`
+- validate required columns
+- encode categorical features (`get_dummies`)
+- scale selected numeric features
+- split train/test and labeled/unlabeled sets
+- serialize splits to `.pkl`
+- train and evaluate:
+  - SupervisedBaseline(RandomForest)
+  - SemiSupervised(SelfTraining)
+  - SemiSupervised(LabelSpreading)
+- save final report to `data/ssl_results.csv`
+
+### 5. Outputs
+
+Generated artifacts:
+
+- data/X_labeled.pkl
+- data/y_labeled.pkl
+- data/X_unlabeled.pkl
+- data/y_unlabeled.pkl
+- data/X_test.pkl
+- data/y_test.pkl
+- data/ssl_results.csv
+- data/ssl_comparison.png

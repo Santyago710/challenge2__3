@@ -72,9 +72,7 @@ docs/features.md
 
 ---
 
-# Work Completed (Person 1)
-
-The following steps have already been completed:
+# Preprocessing Data
 
 ### 1. Exploratory Data Analysis (EDA)
 
@@ -139,11 +137,9 @@ This dataset should be used for model training.
 
 ---
 
-# Work To Be Completed (Person 2)
+# Finished dataset and Baselines models
 
-Person 2 is responsible for the **Model Training and Evaluation stage**.
-
-The following datasets are available:
+The following data is available for later use or to have a better comparition:
 
 | Dataset | Description |
 |------|------|
@@ -193,7 +189,7 @@ We use the data we already prepared for the train and evaluation of the models b
 
 That to have a summarized information for later comparition. All this can be found in the notebooks/baseline_models.ipynb
 
-# Work Completed (Person 3) - Semi-Supervised Stage
+# Semi-Supervised Stage
 
 Implemented the full **modeling, semi-supervised learning, and evaluation** stage.
 
